@@ -531,7 +531,7 @@ void CGameFramework::UpdateShaderVariables()
 	m_pcbMappedFrameworkInfo->m_fShadowMapIndex = m_fShadowMapIndex;
 
 	D3D12_GPU_VIRTUAL_ADDRESS d3dGpuVirtualAddress = m_pd3dcbFrameworkInfo->GetGPUVirtualAddress();
-	m_pd3dCommandList->SetGraphicsRootConstantBufferView(10, d3dGpuVirtualAddress);
+	m_pd3dCommandList->SetGraphicsRootConstantBufferView(RP_FRAMEWORK_INFO, d3dGpuVirtualAddress);
 }
 
 void CGameFramework::ReleaseShaderVariables()
