@@ -203,24 +203,23 @@ ID3D12RootSignature *CScene::CreateGraphicsRootSignature(ID3D12Device *pd3dDevic
 	D3D12_DESCRIPTOR_RANGE pd3dDescriptorRanges[4];
 	int iIndex = 0;
 	//2번 부터 4개
-	SetDescriptorRange(pd3dDescriptorRanges, iIndex++, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, MAX_DEPTH_TEXTURES, 2, 0);//t2: Depth Buffer
-	SetDescriptorRange(pd3dDescriptorRanges, iIndex++, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0, 0);//t0 gtxtTexture
-	SetDescriptorRange(pd3dDescriptorRanges, iIndex++, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 1, 0);//t1: gtxtRandomTexture
-	SetDescriptorRange(pd3dDescriptorRanges, iIndex++, D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 7, 0);//t1: b7 particle
+	SetDescriptorRange(pd3dDescriptorRanges, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, MAX_DEPTH_TEXTURES, 2, 0);//t2: Depth Buffer
+	SetDescriptorRange(pd3dDescriptorRanges, 1, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0, 0);//t0 gtxtTexture
+	SetDescriptorRange(pd3dDescriptorRanges, 2, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 1, 0);//t1: gtxtRandomTexture
+	SetDescriptorRange(pd3dDescriptorRanges, 3, D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 7, 0);//t1: b7 particle
 
 	D3D12_ROOT_PARAMETER pd3dRootParameters[11];
-	iIndex = 0;
-	SetRootParameterConstants(pd3dRootParameters, iIndex++, 17, 0, 0, D3D12_SHADER_VISIBILITY_ALL); //Game Object
-	SetRootParameterCBV(pd3dRootParameters, iIndex++, 1, 0, D3D12_SHADER_VISIBILITY_ALL);//Camera
-	SetRootParameterCBV(pd3dRootParameters, iIndex++, 5, 0, D3D12_SHADER_VISIBILITY_ALL);//ToProjector
-	SetRootParameterCBV(pd3dRootParameters, iIndex++, 3, 0, D3D12_SHADER_VISIBILITY_ALL);//Materials
-	SetRootParameterCBV(pd3dRootParameters, iIndex++, 4, 0, D3D12_SHADER_VISIBILITY_ALL);//Lights
-	SetRootParameterDescriptorTable(pd3dRootParameters, iIndex++, 1, &pd3dDescriptorRanges[0], D3D12_SHADER_VISIBILITY_PIXEL);//Depth Buffer
-	SetRootParameterCBV(pd3dRootParameters, iIndex++, 6, 0, D3D12_SHADER_VISIBILITY_ALL);//ToLight
-	SetRootParameterDescriptorTable(pd3dRootParameters, iIndex++, 1, &pd3dDescriptorRanges[1], D3D12_SHADER_VISIBILITY_ALL);//gtxtTexture
-	SetRootParameterDescriptorTable(pd3dRootParameters, iIndex++, 1, &pd3dDescriptorRanges[2], D3D12_SHADER_VISIBILITY_ALL);//gtxtRandomTexture
-	SetRootParameterDescriptorTable(pd3dRootParameters, iIndex++, 1, &pd3dDescriptorRanges[3], D3D12_SHADER_VISIBILITY_ALL);//particle
-	SetRootParameterCBV(pd3dRootParameters, iIndex++, 8, 0, D3D12_SHADER_VISIBILITY_ALL);//Framework Info
+	SetRootParameterConstants______(pd3dRootParameters, 0, 17, 0, 0, D3D12_SHADER_VISIBILITY_ALL); //Game Object
+	SetRootParameterCBV____________(pd3dRootParameters, 1, 1, 0, D3D12_SHADER_VISIBILITY_ALL);//Camera
+	SetRootParameterCBV____________(pd3dRootParameters, 2, 5, 0, D3D12_SHADER_VISIBILITY_ALL);//ToProjector
+	SetRootParameterCBV____________(pd3dRootParameters, 3, 3, 0, D3D12_SHADER_VISIBILITY_ALL);//Materials
+	SetRootParameterCBV____________(pd3dRootParameters, 4, 4, 0, D3D12_SHADER_VISIBILITY_ALL);//Lights
+	SetRootParameterDescriptorTable(pd3dRootParameters, 5, 1, &pd3dDescriptorRanges[0], D3D12_SHADER_VISIBILITY_PIXEL);//Depth Buffer
+	SetRootParameterCBV____________(pd3dRootParameters, 6, 6, 0, D3D12_SHADER_VISIBILITY_ALL);//ToLight
+	SetRootParameterDescriptorTable(pd3dRootParameters, 7, 1, &pd3dDescriptorRanges[1], D3D12_SHADER_VISIBILITY_ALL);//gtxtTexture
+	SetRootParameterDescriptorTable(pd3dRootParameters, 8, 1, &pd3dDescriptorRanges[2], D3D12_SHADER_VISIBILITY_ALL);//gtxtRandomTexture
+	SetRootParameterDescriptorTable(pd3dRootParameters, 9, 1, &pd3dDescriptorRanges[3], D3D12_SHADER_VISIBILITY_ALL);//particle
+	SetRootParameterCBV____________(pd3dRootParameters, RP_FRAMEWORK_INFO, 8, 0, D3D12_SHADER_VISIBILITY_ALL);//Framework Info
 
 	D3D12_STATIC_SAMPLER_DESC d3dSamplerDescs[4];
 
@@ -436,7 +435,7 @@ void CScene::SetDescriptorRange(D3D12_DESCRIPTOR_RANGE pd3dDescriptorRanges[], i
 	pd3dDescriptorRanges[iIndex].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 }
 
-void CScene::SetRootParameterCBV(D3D12_ROOT_PARAMETER pd3dRootParameter[], int iIndex, UINT ShaderRegister, UINT RegisterSpace, D3D12_SHADER_VISIBILITY ShaderVisibility)
+void CScene::SetRootParameterCBV____________(D3D12_ROOT_PARAMETER pd3dRootParameter[], int iIndex, UINT ShaderRegister, UINT RegisterSpace, D3D12_SHADER_VISIBILITY ShaderVisibility)
 {
 	pd3dRootParameter[iIndex].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	pd3dRootParameter[iIndex].Descriptor.ShaderRegister = ShaderRegister;
@@ -452,7 +451,7 @@ void CScene::SetRootParameterDescriptorTable(D3D12_ROOT_PARAMETER pd3dRootParame
 	pd3dRootParameter[iIndex].ShaderVisibility = ShaderVisibility;
 }
 
-void CScene::SetRootParameterConstants(D3D12_ROOT_PARAMETER pd3dRootParameter[], int iIndex, UINT Num32BitValues, UINT ShaderRegister, UINT RegisterSpace, D3D12_SHADER_VISIBILITY ShaderVisibility)
+void CScene::SetRootParameterConstants______(D3D12_ROOT_PARAMETER pd3dRootParameter[], int iIndex, UINT Num32BitValues, UINT ShaderRegister, UINT RegisterSpace, D3D12_SHADER_VISIBILITY ShaderVisibility)
 {
 	pd3dRootParameter[iIndex].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
 	pd3dRootParameter[iIndex].Constants.Num32BitValues = Num32BitValues;

@@ -71,6 +71,12 @@ using Microsoft::WRL::ComPtr;
 #define _PLANE_WIDTH			1024
 #define _PLANE_HEIGHT			1024
 
+
+/////////////////////////////
+#define RP_FRAMEWORK_INFO 10
+/////////////////////////////
+
+
 #include <iostream>
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
