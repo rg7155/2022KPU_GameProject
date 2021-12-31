@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Fantasy Heroes Pack 01/Adventurer Aland/Scenes/Showcase.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
