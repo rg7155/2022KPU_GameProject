@@ -22,7 +22,8 @@
 
 #include <fstream>
 #include <vector>
-
+#include <map>
+#include <list>
 using namespace std;
 
 #include <d3d12.h>
@@ -70,6 +71,7 @@ extern ID3D12Resource *CreateTextureResourceFromWICFile(ID3D12Device *pd3dDevice
 extern BYTE ReadStringFromFile(FILE *pInFile, char *pstrToken);
 extern int ReadIntegerFromFile(FILE *pInFile);
 extern float ReadFloatFromFile(FILE *pInFile);
+extern XMFLOAT3 ReadVectorFromFile(FILE* pInFile, int n);
 
 #define RANDOM_COLOR			XMFLOAT4(rand() / float(RAND_MAX), rand() / float(RAND_MAX), rand() / float(RAND_MAX), rand() / float(RAND_MAX))
 

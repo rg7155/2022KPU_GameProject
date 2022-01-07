@@ -426,13 +426,7 @@ void CStandardObjectsShader::Render(ID3D12GraphicsCommandList *pd3dCommandList, 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-CHellicopterObjectsShader::CHellicopterObjectsShader()
-{
-}
 
-CHellicopterObjectsShader::~CHellicopterObjectsShader()
-{
-}
 
 float Random(float fMin, float fMax)
 {
@@ -459,107 +453,93 @@ XMFLOAT3 RandomPositionInSphere(XMFLOAT3 xmf3Center, float fRadius, int nColumn,
 	return(xmf3Position);
 }
 
-void CHellicopterObjectsShader::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *pd3dCommandList, ID3D12RootSignature *pd3dGraphicsRootSignature, CLoadedModelInfo *pModel, void *pContext)
-{
-	m_nObjects = 4;
-	m_ppObjects = new CGameObject*[m_nObjects];
-
-	//CLoadedModelInfo *pSuperCobraModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, "Model/SuperCobra_new.bin", this);
-	CLoadedModelInfo *pGunshipModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, "Model/Gunship_new.bin", this);
-	CLoadedModelInfo* pMapModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, "Model/Map.bin", this);
-
-	int nColumnSpace = 5, nColumnSize = 30;           
-    int nFirstPassColumnSize = (m_nObjects % nColumnSize) > 0 ? (nColumnSize - 1) : nColumnSize;
-
-	CHeightMapTerrain *pTerrain = (CHeightMapTerrain *)pContext;
-
-	int nObjects = 0;
-  //  for (int h = 0; h < nFirstPassColumnSize; h++)
-  //  {
-  //      for (int i = 0; i < floor(float(m_nObjects) / float(nColumnSize)); i++)
-  //      {
-		//	//if (nObjects % 2)
-		//	//{
-		//	//	m_ppObjects[nObjects] = new CSuperCobraObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
-		//	//	m_ppObjects[nObjects]->SetChild(pSuperCobraModel->m_pModelRootObject, true);
-		//	//}
-		//	//else
-		//	//{
-		//	//	m_ppObjects[nObjects] = new CGunshipObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
-		//	//	m_ppObjects[nObjects]->SetChild(2pGunshipModel->m_pModelRootObject, true);
-		//	//}
-		//	m_ppObjects[nObjects] = new CGunshipObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
-		//	m_ppObjects[nObjects]->SetChild(pGunshipModel->m_pModelRootObject, true);
-
-		//	float fHeight = pTerrain->GetHeight(390.0f, 670.0f);
-		//	XMFLOAT3 xmf3Position = RandomPositionInSphere(XMFLOAT3(390.0f, fHeight + 35.0f, 670.0f), Random(20.0f, 100.0f), h - int(floor(nColumnSize / 2.0f)), nColumnSpace);
-		//	xmf3Position.y = pTerrain->GetHeight(xmf3Position.x, xmf3Position.z) + Random(0.0f, 25.0f);
-		//	m_ppObjects[nObjects]->SetPosition(xmf3Position);
-		//	m_ppObjects[nObjects]->Rotate(0.0f, 90.0f, 0.0f);
-		//	m_ppObjects[nObjects++]->OnPrepareAnimate();
-		//}
-  //  }
-
-  //  if (nFirstPassColumnSize != nColumnSize)
-  //  {
-  //      for (int i = 0; i < m_nObjects - int(floor(float(m_nObjects) / float(nColumnSize)) * nFirstPassColumnSize); i++)
-  //      {
-		//	//if (nObjects % 2)
-		//	//{
-		//	//	m_ppObjects[nObjects] = new CSuperCobraObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
-		//	//	m_ppObjects[nObjects]->SetChild(pSuperCobraModel->m_pModelRootObject, true);
-		//	//}
-		//	//else
-		//	//{
-		//	//	m_ppObjects[nObjects] = new CGunshipObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
-		//	//	m_ppObjects[nObjects]->SetChild(pGunshipModel->m_pModelRootObject, true);
-		//	//}
-
-		//	m_ppObjects[nObjects] = new CGunshipObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
-		//	m_ppObjects[nObjects]->SetChild(pGunshipModel->m_pModelRootObject, true);
-
-		//	m_ppObjects[nObjects]->SetPosition(RandomPositionInSphere(XMFLOAT3(0.0f, 0.0f, 0.0f), Random(20.0f, 100.0f), nColumnSize - int(floor(nColumnSize / 2.0f)), nColumnSpace));
-		//	m_ppObjects[nObjects]->Rotate(0.0f, 90.0f, 0.0f);
-		//	m_ppObjects[nObjects++]->OnPrepareAnimate();
-  //      }
-  //  }
-
-	for (int i = 0; i < m_nObjects; ++i)
-	{
-		if (i != m_nObjects - 1)
-		{
-			m_ppObjects[i] = new CGunshipObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
-			m_ppObjects[i]->SetChild(pGunshipModel->m_pModelRootObject, true);
-		}
-		else
-		{
-			m_ppObjects[i] = new CGameObject();
-			m_ppObjects[i]->SetChild(pMapModel->m_pModelRootObject, true);
-		}
-
-		float fHeight = pTerrain->GetHeight(390.0f, 670.0f);
-		//XMFLOAT3 xmf3Position = RandomPositionInSphere(XMFLOAT3(390.0f, fHeight + 35.0f, 670.0f), Random(20.0f, 100.0f), h - int(floor(nColumnSize / 2.0f)), nColumnSpace);
-		//XMFLOAT3 xmf3Position = { 100.f, 0, 100.f + i * 100.f };
-		XMFLOAT3 xmf3Position = { 0.f, 0.f, 0.f };
-
-		xmf3Position.y = pTerrain->GetHeight(xmf3Position.x, xmf3Position.z) + 0.f;
-		m_ppObjects[i]->SetPosition(xmf3Position);
-		m_ppObjects[i]->SetScale(1.f, 1.f, 1.f);
-
-		m_ppObjects[i]->Rotate(0.0f, 0.0f, 0.0f);
-		m_ppObjects[i]->OnPrepareAnimate();
-	}
-
-
-
-	CreateShaderVariables(pd3dDevice, pd3dCommandList);
-
-	//if (pSuperCobraModel) delete pSuperCobraModel;
-	if (pGunshipModel) delete pGunshipModel;
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
+
+
+CMapObjectsShader::CMapObjectsShader()
+{
+}
+
+CMapObjectsShader::~CMapObjectsShader()
+{
+}
+
+void CMapObjectsShader::BuildObjects(ID3D12Device* pd3dDevice, ID3D12GraphicsCommandList* pd3dCommandList, ID3D12RootSignature* pd3dGraphicsRootSignature, CLoadedModelInfo* pModel, void* pContext)
+{
+	FILE* pInFile = NULL;
+
+	if (::fopen_s(&pInFile, "Data/MapTransform.bin", "rb"))
+		return;
+	//pInFile = fopen("Data/MapTransform.txt", "r");
+	//::rewind(pInFile); //스트림 맨위로
+
+	CLoadedModelInfo* pLoadedModel = new CLoadedModelInfo();
+
+	char pstrToken[64] = { '\0' };
+
+	m_nObjects = ReadIntegerFromFile(pInFile); 
+	m_ppObjects = new CGameObject * [m_nObjects];
+
+	map<string, CLoadedModelInfo*> mapObj; //key가 char*면 크기가 다 똑같다
+	for (int i = 0; i < m_nObjects; ++i)
+	{
+		if (ReadStringFromFile(pInFile, pstrToken))
+		{
+			CLoadedModelInfo* pMapModel = NULL;
+			bool bLoad = true;
+			int iLength = strlen(pstrToken);
+			if (pstrToken[iLength - 1] == ')')
+			{
+				bLoad = false;
+				pstrToken[iLength - 4] = '\0'; //01 (1)
+			}
+
+			int s = mapObj.size();
+			string str(pstrToken);
+			auto iter = mapObj.find(str);
+			if (bLoad && iter == mapObj.end())
+			{
+				//삽입
+				char pFileName[64] = "Model/";
+				strcat_s(pFileName, pstrToken);
+				strcat_s(pFileName, ".bin");
+
+				pMapModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, pFileName, this);
+				mapObj.emplace(str, pMapModel);
+			}
+			else
+			{
+				//iter로 모델 씀
+				pMapModel = iter->second;
+			}
+
+
+			m_ppObjects[i] = new CGameObject();
+			m_ppObjects[i]->SetChild(pMapModel->m_pModelRootObject, true);
+
+			//크자이로 읽어옴
+			XMFLOAT3 xmf3Scale = ReadVectorFromFile(pInFile, 3);
+			m_ppObjects[i]->SetScale(xmf3Scale);
+
+			XMFLOAT3 xmf3Rotaion = ReadVectorFromFile(pInFile, 3);
+			m_ppObjects[i]->Rotate(xmf3Rotaion.x, xmf3Rotaion.y, xmf3Rotaion.z);
+
+			XMFLOAT3 xmf3Position = ReadVectorFromFile(pInFile, 3);
+			m_ppObjects[i]->SetPosition(xmf3Position);
+
+			m_ppObjects[i]->OnPrepareAnimate();
+		}
+
+	}
+
+
+	CreateShaderVariables(pd3dDevice, pd3dCommandList);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 CSkinnedAnimationObjectsShader::CSkinnedAnimationObjectsShader()
 {
 }
@@ -606,94 +586,3 @@ void CSkinnedAnimationObjectsShader::Render(ID3D12GraphicsCommandList *pd3dComma
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-CAngrybotObjectsShader::CAngrybotObjectsShader()
-{
-}
-
-CAngrybotObjectsShader::~CAngrybotObjectsShader()
-{
-}
-
-void CAngrybotObjectsShader::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *pd3dCommandList, ID3D12RootSignature *pd3dGraphicsRootSignature, CLoadedModelInfo *pModel, void *pContext)
-{
-	int xObjects = 3, zObjects = 3, i = 0;
-
-	m_nObjects = (xObjects * 2 + 1) * (zObjects * 2 + 1);
-
-	m_ppObjects = new CGameObject*[m_nObjects];
-
-	float fxPitch = 7.0f * 2.5f;
-	float fzPitch = 7.0f * 2.5f;
-
-	CHeightMapTerrain *pTerrain = (CHeightMapTerrain *)pContext;
-
-	CLoadedModelInfo *pAngrybotModel = pModel;
-	if (!pAngrybotModel) pAngrybotModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, "Model/Angrybot.bin", NULL);
-
-	int nObjects = 0;
-	for (int x = -xObjects; x <= xObjects; x++)
-	{
-		for (int z = -zObjects; z <= zObjects; z++)
-		{
-			m_ppObjects[nObjects] = new CAngrybotObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, pAngrybotModel, 1);
-			m_ppObjects[nObjects]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, (nObjects % 2));
-			m_ppObjects[nObjects]->m_pSkinnedAnimationController->SetTrackSpeed(0, (nObjects % 2) ? 0.25f : 1.0f);
-			m_ppObjects[nObjects]->m_pSkinnedAnimationController->SetTrackPosition(0, (nObjects % 3) ? 0.85f : 0.0f);
-			XMFLOAT3 xmf3Position = XMFLOAT3(fxPitch*x + 390.0f, 0.0f, 730.0f + fzPitch * z);
-			xmf3Position.y = pTerrain->GetHeight(xmf3Position.x, xmf3Position.z);
-			m_ppObjects[nObjects]->SetPosition(xmf3Position);
-			m_ppObjects[nObjects++]->SetScale(2.0f, 2.0f, 2.0f);
-		}
-    }
-
-	CreateShaderVariables(pd3dDevice, pd3dCommandList);
-
-	if (!pModel && pAngrybotModel) delete pAngrybotModel;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-CEthanObjectsShader::CEthanObjectsShader()
-{
-}
-
-CEthanObjectsShader::~CEthanObjectsShader()
-{
-}
-
-void CEthanObjectsShader::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *pd3dCommandList, ID3D12RootSignature *pd3dGraphicsRootSignature, CLoadedModelInfo *pModel, void *pContext)
-{
-	int xObjects = 3, zObjects = 3, i = 0;
-
-	m_nObjects = (xObjects * 2 + 1) * (zObjects * 2 + 1);
-
-	m_ppObjects = new CGameObject*[m_nObjects];
-
-	float fxPitch = 7.0f * 2.5f;
-	float fzPitch = 7.0f * 2.5f;
-
-	CHeightMapTerrain *pTerrain = (CHeightMapTerrain *)pContext;
-
-	CLoadedModelInfo *pEthanModel = pModel;
-	if (!pEthanModel) pEthanModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, "Model/Ethan.bin", NULL);
-
-	int nObjects = 0;
-	for (int x = -xObjects; x <= xObjects; x++)
-	{
-		for (int z = -zObjects; z <= zObjects; z++)
-		{
-			m_ppObjects[nObjects] = new CEthanObject(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, pEthanModel, 1);
-			m_ppObjects[nObjects]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, (nObjects % 4));
-			m_ppObjects[nObjects]->m_pSkinnedAnimationController->SetTrackSpeed(0, 0.025f);
-			m_ppObjects[nObjects]->m_pSkinnedAnimationController->SetTrackPosition(0, (nObjects % 10) * 0.35f);
-			XMFLOAT3 xmf3Position = XMFLOAT3(fxPitch*x + 290.0f, 0.0f, 750.0f + fzPitch * z);
-			xmf3Position.y = pTerrain->GetHeight(xmf3Position.x, xmf3Position.z);
-			m_ppObjects[nObjects++]->SetPosition(xmf3Position);
-		}
-    }
-
-	CreateShaderVariables(pd3dDevice, pd3dCommandList);
-
-	if (!pModel && pEthanModel) delete pEthanModel;
-}

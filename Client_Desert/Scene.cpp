@@ -106,85 +106,16 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	//m_ppHierarchicalGameObjects[0]->SetPosition(410.0f, m_pTerrain->GetHeight(410.0f, 735.0f), 735.0f);
 	//if (pAngrybotModel) delete pAngrybotModel;
 
-	//CLoadedModelInfo *pMonsterModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Monster.bin", NULL);
-	//m_ppHierarchicalGameObjects[1] = new CMonsterObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pMonsterModel, 1);
-	//m_ppHierarchicalGameObjects[1]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 0);
-	//m_ppHierarchicalGameObjects[1]->SetPosition(430.0f, m_pTerrain->GetHeight(430.0f, 700.0f), 700.0f);
-	//m_ppHierarchicalGameObjects[1]->SetScale(3.0f, 3.0f, 3.0f);
-	//m_ppHierarchicalGameObjects[2] = new CMonsterObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pMonsterModel, 1);
-	//m_ppHierarchicalGameObjects[2]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 1);
-	//m_ppHierarchicalGameObjects[2]->SetPosition(400.0f, m_pTerrain->GetHeight(400.0f, 720.0f), 720.0f);
-	//m_ppHierarchicalGameObjects[2]->SetScale(3.0f, 3.0f, 3.0f);
-	//m_ppHierarchicalGameObjects[3] = new CMonsterObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pMonsterModel, 1);
-	//m_ppHierarchicalGameObjects[3]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 2);
-	//m_ppHierarchicalGameObjects[3]->SetPosition(380.0f, m_pTerrain->GetHeight(380.0f, 750.0f), 750.0f);
-	//m_ppHierarchicalGameObjects[3]->SetScale(3.0f, 3.0f, 3.0f);
-	//if (pMonsterModel) delete pMonsterModel;
-
-	//CLoadedModelInfo *pHumanoidModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Humanoid.bin", NULL);
-	//m_ppHierarchicalGameObjects[4] = new CHumanoidObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pHumanoidModel, 1);
-	//m_ppHierarchicalGameObjects[4]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 0);
-	//m_ppHierarchicalGameObjects[4]->SetPosition(400.0f, m_pTerrain->GetHeight(400.0f, 670.0f), 670.0f);
-	//m_ppHierarchicalGameObjects[4]->Rotate(0.0f, 180.0f, 0.0f);
-	//m_ppHierarchicalGameObjects[4]->SetScale(5.0f, 5.0f, 5.0f);
-
-	//m_ppHierarchicalGameObjects[5] = new CHumanoidObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pHumanoidModel, 1);
-	//m_ppHierarchicalGameObjects[5]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 1);
-	//m_ppHierarchicalGameObjects[5]->SetPosition(410.0f, m_pTerrain->GetHeight(410.0f, 660.0f), 660.0f);
-	//m_ppHierarchicalGameObjects[5]->SetScale(5.0f, 5.0f, 5.0f);
-	//if (pHumanoidModel) delete pHumanoidModel;
-
-	//CLoadedModelInfo *pEthanModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Ethan.bin", NULL);
-	//m_ppHierarchicalGameObjects[6] = new CEthanObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pEthanModel, 2);
-	//m_ppHierarchicalGameObjects[6]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 0);
-	//m_ppHierarchicalGameObjects[6]->m_pSkinnedAnimationController->SetTrackWeight(0, 0.8f);
-	//m_ppHierarchicalGameObjects[6]->m_pSkinnedAnimationController->SetTrackAnimationSet(1, 1);
-	//m_ppHierarchicalGameObjects[6]->m_pSkinnedAnimationController->SetTrackWeight(1, 0.2f);
-	//m_ppHierarchicalGameObjects[6]->SetPosition(350.0f, m_pTerrain->GetHeight(350.0f, 670.0f), 670.0f);
-
-	//CLoadedModelInfo *pZebraModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Zebra.bin", NULL);
-	//m_ppHierarchicalGameObjects[7] = new CZebraObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pZebraModel, 1);
-	//m_ppHierarchicalGameObjects[7]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 0);
-	//m_ppHierarchicalGameObjects[7]->SetPosition(280.0f, m_pTerrain->GetHeight(280.0f, 640.0f), 620.0f);
-	//m_ppHierarchicalGameObjects[7]->SetScale(0.1f, 0.1f, 0.1f);
-	//if (pZebraModel) delete pZebraModel;
-
-	//CLoadedModelInfo *pLionModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Lion.bin", NULL);
-	//m_ppHierarchicalGameObjects[8] = new CLionObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pLionModel, 1);
-	//m_ppHierarchicalGameObjects[8]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 0);
-	//m_ppHierarchicalGameObjects[8]->SetPosition(300.0f, m_pTerrain->GetHeight(300.0f, 650.0f), 630.0f);
-	//m_ppHierarchicalGameObjects[8]->SetScale(1.0f, 1.0f, 1.0f);
-	//m_ppHierarchicalGameObjects[9] = new CLionObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pLionModel, 1);
-	//m_ppHierarchicalGameObjects[9]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 1);
-	//m_ppHierarchicalGameObjects[9]->SetPosition(310.0f, m_pTerrain->GetHeight(310.0f, 630.0f), 630.0f);
-	//m_ppHierarchicalGameObjects[9]->SetScale(1.0f, 1.0f, 1.0f);
-	//m_ppHierarchicalGameObjects[10] = new CLionObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pLionModel, 1);
-	//m_ppHierarchicalGameObjects[10]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 2);
-	//m_ppHierarchicalGameObjects[10]->SetPosition(250.0f, m_pTerrain->GetHeight(250.0f, 600.0f), 600.0f);
-	//m_ppHierarchicalGameObjects[10]->SetScale(1.0f, 1.0f, 1.0f);
-	//m_ppHierarchicalGameObjects[11] = new CLionObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pLionModel, 1);
-	//m_ppHierarchicalGameObjects[11]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 3);
-	//m_ppHierarchicalGameObjects[11]->SetPosition(270.0f, m_pTerrain->GetHeight(270.0f, 620.0f), 620.0f);
-	//m_ppHierarchicalGameObjects[11]->SetScale(1.0f, 1.0f, 1.0f);
-	//if (pLionModel) delete pLionModel;
-
-	//CLoadedModelInfo *pEagleModel = CGameObject::LoadGeometryAndAnimationFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Eagle.bin", NULL);
-	//m_ppHierarchicalGameObjects[12] = new CEagleObject(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pEagleModel, 1);
-	//m_ppHierarchicalGameObjects[12]->m_pSkinnedAnimationController->SetTrackAnimationSet(0, 0);
-	//m_ppHierarchicalGameObjects[12]->SetPosition(330.0f, m_pTerrain->GetHeight(330.0f, 590.0f) + 20.0f, 590.0f);
-	//if (pEagleModel) delete pEagleModel;
 
 	m_nShaders = 1;
 	m_ppShaders = new CShader*[m_nShaders];
 
-	//CEthanObjectsShader *pEthanObjectsShader = new CEthanObjectsShader();
-	//pEthanObjectsShader->BuildObjects(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, pEthanModel, m_pTerrain);
-	//m_ppShaders[0] = pEthanObjectsShader;
+	int iIndex = 0;
 
-	CHellicopterObjectsShader* pHellicopterObjectsShader = new CHellicopterObjectsShader();
-	pHellicopterObjectsShader->CreateShader(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature);
-	pHellicopterObjectsShader->BuildObjects(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, NULL, m_pTerrain);
-	m_ppShaders[0] = pHellicopterObjectsShader;
+	CMapObjectsShader* pMapObjectsShader = new CMapObjectsShader();
+	pMapObjectsShader->CreateShader(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature);
+	pMapObjectsShader->BuildObjects(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, NULL, m_pTerrain);
+	m_ppShaders[iIndex++] = pMapObjectsShader;
 
 	//if (pEthanModel) delete pEthanModel;
 
@@ -231,7 +162,6 @@ ID3D12RootSignature *CScene::CreateGraphicsRootSignature(ID3D12Device *pd3dDevic
 {
 	ID3D12RootSignature *pd3dGraphicsRootSignature = NULL;
 	D3D12_DESCRIPTOR_RANGE pd3dDescriptorRanges[10];
-	
 	SetDescriptorRange(pd3dDescriptorRanges, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 6, 0);//t6: gtxtAlbedoTexture
 	SetDescriptorRange(pd3dDescriptorRanges, 1, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 7, 0);//t7: gtxtSpecularTexture
 	SetDescriptorRange(pd3dDescriptorRanges, 2, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 8, 0);//t8: gtxtNormalTexture
@@ -244,7 +174,6 @@ ID3D12RootSignature *CScene::CreateGraphicsRootSignature(ID3D12Device *pd3dDevic
 	SetDescriptorRange(pd3dDescriptorRanges, 9, D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 2, 0);//t2: gtxtTerrainDetailTexture
 
 	D3D12_ROOT_PARAMETER pd3dRootParameters[15];
-
 	SetRootParameterCBV(pd3dRootParameters, 0, 1, 0, D3D12_SHADER_VISIBILITY_ALL);//Camera
 	SetRootParameterConstants(pd3dRootParameters, 1, 33, 2, 0, D3D12_SHADER_VISIBILITY_ALL);//GameObject
 	SetRootParameterCBV(pd3dRootParameters, 2, 4, 0, D3D12_SHADER_VISIBILITY_ALL);//Lights
@@ -260,6 +189,7 @@ ID3D12RootSignature *CScene::CreateGraphicsRootSignature(ID3D12Device *pd3dDevic
 	SetRootParameterCBV(pd3dRootParameters, 12, 8, 0, D3D12_SHADER_VISIBILITY_VERTEX);//Skinned Bone Transforms
 	SetRootParameterDescriptorTable(pd3dRootParameters, 13, 1, &pd3dDescriptorRanges[8], D3D12_SHADER_VISIBILITY_PIXEL);
 	SetRootParameterDescriptorTable(pd3dRootParameters, 14, 1, &pd3dDescriptorRanges[9], D3D12_SHADER_VISIBILITY_PIXEL);
+
 
 	D3D12_STATIC_SAMPLER_DESC pd3dSamplerDescs[2];
 
