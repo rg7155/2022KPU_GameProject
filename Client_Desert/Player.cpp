@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Shader.h"
+#include "InputDev.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CPlayer
@@ -496,6 +497,21 @@ void CTerrainPlayer::Move(DWORD dwDirection, float fDistance, bool bUpdateVeloci
 
 void CTerrainPlayer::Update(float fTimeElapsed)
 {
+	//if (CInputDev::GetInstance()->KeyDown(DIK_Z))
+	//{
+
+	//}
+
+	//if (CInputDev::GetInstance()->Get_DIKeyState(DIK_SPACE) & 0x80)
+	//{
+
+	//}
+
+	//if (CInputDev::GetInstance()->LButtonDown())
+	//{
+	//	cout << "LBD" << endl;
+	//}
+	
 	CPlayer::Update(fTimeElapsed);
 
 	if (m_pSkinnedAnimationController)

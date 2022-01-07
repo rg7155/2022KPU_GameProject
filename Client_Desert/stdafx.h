@@ -20,11 +20,11 @@
 #include <wrl.h>
 #include <shellapi.h>
 
+#include <iostream>
 #include <fstream>
 #include <vector>
 #include <map>
 #include <list>
-using namespace std;
 
 #include <d3d12.h>
 #include <dxgi1_4.h>
@@ -34,23 +34,32 @@ using namespace std;
 #include <DirectXColors.h>
 #include <DirectXCollision.h>
 
+#define DIRECTINPUT_VERSION 0x0800
+#include <dinput.h>
+
 #include <Mmsystem.h>
 
 #ifdef _DEBUG
 #include <dxgidebug.h>
 #endif
 
+using namespace std;
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 
 using Microsoft::WRL::ComPtr;
 
+
+//
+#include "Define.h"
+#include "Enum.h"
+//
+
+
 extern HINSTANCE						ghAppInstance;
 
 //#define _WITH_SWAPCHAIN_FULLSCREEN_STATE
 
-#define FRAME_BUFFER_WIDTH				640
-#define FRAME_BUFFER_HEIGHT				480
 
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "d3d12.lib")
@@ -59,6 +68,13 @@ extern HINSTANCE						ghAppInstance;
 #pragma comment(lib, "dxguid.lib")
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
+
+#ifdef UNICODE
+#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console") 
+#else
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console") 
+#endif
+
 
 extern UINT	gnCbvSrvDescriptorIncrementSize;
 extern UINT	gnRtvDescriptorIncrementSize;
@@ -73,9 +89,6 @@ extern int ReadIntegerFromFile(FILE *pInFile);
 extern float ReadFloatFromFile(FILE *pInFile);
 extern XMFLOAT3 ReadVectorFromFile(FILE* pInFile, int n);
 
-#define RANDOM_COLOR			XMFLOAT4(rand() / float(RAND_MAX), rand() / float(RAND_MAX), rand() / float(RAND_MAX), rand() / float(RAND_MAX))
-
-#define EPSILON					1.0e-10f
 
 inline bool IsZero(float fValue) { return((fabsf(fValue) < EPSILON)); }
 inline bool IsEqual(float fA, float fB) { return(::IsZero(fA - fB)); }
@@ -84,11 +97,8 @@ inline bool IsEqual(float fA, float fB, float fEpsilon) { return(::IsZero(fA - f
 inline float InverseSqrt(float fValue) { return 1.0f / sqrtf(fValue); }
 inline void Swap(float *pfS, float *pfT) { float fTemp = *pfS; *pfS = *pfT; *pfT = fTemp; }
 
-#define ANIMATION_TYPE_ONCE				0
-#define ANIMATION_TYPE_LOOP				1
-#define ANIMATION_TYPE_PINGPONG			2
 
-#define ANIMATION_CALLBACK_EPSILON		0.0165f
+
 
 namespace Vector3
 {

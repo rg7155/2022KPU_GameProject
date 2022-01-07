@@ -4,6 +4,7 @@
 
 #include "stdafx.h"
 #include "GameFramework.h"
+#include "InputDev.h"
 
 CGameFramework::CGameFramework()
 {
@@ -52,6 +53,8 @@ bool CGameFramework::OnCreate(HINSTANCE hInstance, HWND hMainWnd)
 	CoInitialize(NULL);
 
 	BuildObjects();
+
+	CInputDev::GetInstance()->Ready_InputDev(m_hInstance, m_hWnd);
 
 	return(true);
 }
@@ -392,6 +395,8 @@ void CGameFramework::OnDestroy()
 	HRESULT hResult = pdxgiDebug->ReportLiveObjects(DXGI_DEBUG_ALL, DXGI_DEBUG_RLO_DETAIL);
 	pdxgiDebug->Release();
 #endif
+
+	CInputDev::GetInstance()->DestroyInstance();
 }
 
 #define _WITH_TERRAIN_PLAYER
@@ -515,6 +520,8 @@ void CGameFramework::FrameAdvance()
 {    
 	m_GameTimer.Tick(30.0f);
 	
+	CInputDev::GetInstance()->Set_InputDev();
+
 	ProcessInput();
 
     AnimateObjects();
