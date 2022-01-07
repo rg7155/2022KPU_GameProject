@@ -70,7 +70,6 @@ ExportedObj/
 .consulo/
 *.csproj
 *.unityproj
-*.sln
 *.suo
 *.tmp
 *.user
@@ -80,6 +79,7 @@ ExportedObj/
 *.svd
 *.pdb
 *.mdb
+*.sln
 *.opendb
 *.VC.db
 
